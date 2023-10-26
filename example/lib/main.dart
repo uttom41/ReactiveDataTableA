@@ -36,7 +36,6 @@ class _HomeState extends State<Home> {
   ValueNotifier<String> age = ValueNotifier("12");
   ValueNotifier<String> address = ValueNotifier("Uttra");
   ValueNotifier<String> phone = ValueNotifier("01717633441");
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

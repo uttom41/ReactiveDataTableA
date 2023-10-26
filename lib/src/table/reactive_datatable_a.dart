@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_datatable_a/src/table/table_conf.dart';
 import '../../reactive_datatable_a.dart';
 
 
@@ -41,5 +42,11 @@ class _ResizeTableAState extends State<ReactiveDataTableA> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    TableConf.dispose();
+    super.dispose();
   }
 }

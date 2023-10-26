@@ -40,11 +40,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white38,
       appBar: AppBar(),
       body: Column(
         children: [
           ReactiveDataTableA(
               dataSource: [
+                {"name":name,"age":age,"Address":address,"Phone":phone},
+                {"name":name,"age":age,"Address":address,"Phone":phone},
+                {"name":name,"age":age,"Address":address,"Phone":phone},
                 {"name":name,"age":age,"Address":address,"Phone":phone},
               ],
               columData: [

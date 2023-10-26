@@ -1,7 +1,7 @@
 library reactive_datatable_a;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/build/build_row.dart';
+export 'src/build/build_table.dart';
+export 'src/build/data_column.dart';
+export 'src/build/reactive_datatable_a.dart';
+export 'src/build/column_model.dart';

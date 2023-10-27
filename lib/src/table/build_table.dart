@@ -1,33 +1,29 @@
 
 import 'package:flutter/material.dart';
 import 'package:reactive_datatable_a/src/table/table_conf.dart';
-import 'package:reactive_datatable_a/src/notify/reactive_notifyer.dart';
 
 import '../../reactive_datatable_a.dart';
 
 class BuildTable {
-  final List<Map<String, ValueNotifier>> dataSource;
-  final List<ColumnInfo> columData;
-  const BuildTable({required this.columData, required this.dataSource});
 
   Widget build(){
+    TableConf conf = TableConf.init();
     return DataTable(
       columnSpacing: 0,
       horizontalMargin: 0,
       headingRowHeight: 50,
-      dividerThickness: .5,
-      // border: TableBorder.all(color:Colors.red),
-      columns: List.generate(columData.length, (index) {
+      dividerThickness: conf.borderSize,
+     // border: TableBorder.all(color:conf.borderColor),
+      columns: List.generate(conf.columnList.length, (index) {
         return DataColumn(
           label: Stack(
             children: [
-              BuildDataColumn(dataSource: dataSource,columData: columData).build(columData[index], index, (columData.length - 1)),
+              BuildDataColumn().build(conf.columnList[index], index, (conf.columnList.length - 1)),
               Positioned(
                 right: 0,
                 child: Builder(
                     builder: (subContext) {
-                      ValueNotifier<double> width = columData[index].columWidth!;
-                      TableConf tab = TableConf.init();
+                      ValueNotifier<double> width = conf.columnList[index].notifyColumnWith;
                       return MouseRegion(
                         // onHover: (event) {
                         //   tab.setHover(true);
@@ -38,21 +34,21 @@ class BuildTable {
                         cursor: SystemMouseCursors.cell,
                         child: GestureDetector(
                           onPanStart: (details) {
-                            columData[index].initX = details.globalPosition.dx;
+                            conf.columnList[index].initX = details.globalPosition.dx;
                           },
                           onPanUpdate: (details) {
-                            final increment = details.globalPosition.dx -  columData[index].initX;
+                            final increment = details.globalPosition.dx -  conf.columnList[index].initX;
                             final newWidth =  width.reactiveValue(subContext) + increment;
-                            columData[index].initX = details.globalPosition.dx;
-                            columData[index].setCollWidth(newWidth > 100 ? newWidth : 100);
+                            conf.columnList[index].initX = details.globalPosition.dx;
+                            conf.columnList[index].updateCollWidth(newWidth > conf.colMinWidth ? newWidth : conf.colMinWidth);
 
                           },
                           child: Container(
                             alignment: Alignment.centerRight,
-                            width: 50,
+                            width: 5,
                             height: 50,
                            decoration: const BoxDecoration(),
-                           child: Container(width: 2,height: 50,decoration: BoxDecoration(color: Colors.red),),
+                           child: Container(width: conf.borderSize,height: conf.colHeight,decoration: BoxDecoration(color:conf.borderColor),),
 
                            // child: tab.resizeHover.reactiveValue(subContext)?Icon(Icons.add,):Container(color: Colors.transparent,),
                           )
@@ -66,8 +62,8 @@ class BuildTable {
         );
       }),
       rows: List.generate(
-        dataSource.length,
-            (index) => BuildRow(dataSource: dataSource,columData: columData).build(dataSource[index], index),
+        conf.rowList.length,
+            (index) => BuildRow().build(conf.rowList[index], index),
       ),);
   }
 }

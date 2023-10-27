@@ -1,23 +1,37 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:reactive_datatable_a/src/table/table_conf.dart';
 
 import '../../reactive_datatable_a.dart';
 
 class CalculateCellSize{
 
-  final List<ColumnInfo> columData;
-  final BuildContext context;
+  void calculateColumnSize() {
 
-  CalculateCellSize({required this.columData,required this.context});
+    TableConf conf = TableConf.init();
 
-  void calculateSize() {
-    Size mediaSize = MediaQuery.of(context).size;
-    double cellWidth = mediaSize.width / columData.length;
-    double extraWidth = ((cellWidth-30)/(columData.length-1)) + cellWidth;
+   // double extraWidth = ((cellWidth-30)/(conf.columnList.length-1)) + cellWidth;
+    double currentWidth = conf.screenWidth; /// total width.
+    int totalCelCount =0;
 
-    for(ColumnInfo  cel in columData) {
-      cel.setCollWidth(extraWidth);
+    for(ColumnInfo  cel in conf.columnList) {
+      if(cel.type == ColumnType.sl && cel.columWidth==0.0){
+        cel.setCollWidth(30);
+        currentWidth -=30;
+      } else if(cel.columWidth != null && cel.columWidth != 0.0) {
+        currentWidth -= cel.columWidth!;
+      } else {
+        totalCelCount++;
+      }
+    }
+    if(currentWidth > 0){
+      for(ColumnInfo cel in conf.columnList) {
+        double cellWidth = currentWidth / totalCelCount; ///single cell size without padding
+        if(cel.notifyColumnWith.value == 0.0 || (cel.type != ColumnType.sl && cel.notifyColumnWith.value != cellWidth)){
+          cel.setCollWidth(cellWidth>conf.colMinWidth?cellWidth:conf.colMinWidth);
+        }
+      }
     }
 
     // for (ColumnInfo cell in parent.columData) {

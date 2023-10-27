@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:reactive_datatable_a/reactive_datatable_a.dart';
 
 typedef Formatter =String Function(String value);
 typedef OnTap = Function(Map<String,dynamic> rowData);
@@ -7,7 +8,8 @@ typedef ChangePage = void Function(int index);
 class ColumnInfo {
   Widget columnHeader;
   ColumnType type;
-  ValueNotifier<double>? columWidth;
+  ValueNotifier<double>? _notifyColumnWith;
+  double? columWidth;
   double columHeight;
   Color? backgroundColor;
   bool selectedCol;
@@ -24,19 +26,27 @@ class ColumnInfo {
     required this.rowName,
     required this.textColor,
     this.columHeight =50,
-    double? columWidth,
+    this.columWidth,
     this.selectedCol = false,
     this.formatter,
     this.onTap,
     this.initX =0,
   }){
-    this.columWidth = ValueNotifier(columWidth??100.0);
+    _notifyColumnWith = ValueNotifier(columWidth??0.0);
   }
 
   void setCollWidth(double width) {
-    columWidth!.value = width;
-//    columWidth!.notifyChanged();
+    _notifyColumnWith = ValueNotifier(width);
+   // _notifyColumnWith!.notifyChanged();
   }
+
+  void updateCollWidth(double width) {
+    _notifyColumnWith!.value = width;
+    // _notifyColumnWith!.notifyChanged();
+  }
+
+  ValueNotifier<double> get notifyColumnWith => _notifyColumnWith!;
+
 
 }
 

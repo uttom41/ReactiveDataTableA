@@ -36,57 +36,76 @@ class _HomeState extends State<Home> {
   ValueNotifier<String> age = ValueNotifier("12");
   ValueNotifier<String> address = ValueNotifier("Uttra");
   ValueNotifier<String> phone = ValueNotifier("01717633441");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white38,
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          ReactiveDataTableA(
-              dataSource: [
-                {"name":name,"age":age,"Address":address,"Phone":phone},
-                {"name":name,"age":age,"Address":address,"Phone":phone},
-                {"name":name,"age":age,"Address":address,"Phone":phone},
-                {"name":name,"age":age,"Address":address,"Phone":phone},
-              ],
-              columData: [
-                ColumnInfo(
-                  rowName: "name",
-                  type: ColumnType.string,
-                  columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
-                  textColor: Colors.white38,
-                ),
-                ColumnInfo(
-                  rowName: "age",
-                  type: ColumnType.string,
-                  columnHeader: Text("Age"),
-                  textColor: Colors.white38,
-                ),
-                ColumnInfo(
-                  rowName: "Address",
-                  backgroundColor: Colors.white70,
-                  type: ColumnType.string,
-                  columnHeader:Text("Address"),
-                  textColor: Colors.white38,
-                ),
-                ColumnInfo(
-                  rowName: "Phone",
-                  type: ColumnType.string,
-                  columnHeader: Text("Phone"),
-                  textColor: Colors.white38,
-                ),
-              ]
-          ),
+      appBar: AppBar(title: Text("Example"),backgroundColor: Colors.deepPurple,),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            ReactiveDataTableA(
+                dataSource: [
+                  {"name":name,"age":age,"Address":address,"Phone":phone},
+                  {"name":name,"age":age,"Address":address,"Phone":phone},
+                  {"name":name,"age":age,"Address":address,"Phone":phone},
+                  {"name":name,"age":age,"Address":address,"Phone":phone},
+                ],
+                columData: [
+                  ColumnInfo(
+                    rowName: "",
+                    type: ColumnType.sl,
+                    columnHeader: Text(""),
+                    columWidth: 30,
+                    backgroundColor: Colors.white38,
+                    textColor: Colors.black54,
+                  ),
+                  ColumnInfo(
+                    rowName: "name",
+                    type: ColumnType.string,
+                    columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
+                    textColor: Colors.black54,
+                  ),
+                  ColumnInfo(
+                    rowName: "age",
+                    type: ColumnType.string,
+                    columnHeader: Text("Age"),
+                    textColor: Colors.black54,
+                  ),
+                  ColumnInfo(
+                    rowName: "Address",
+                    backgroundColor: Colors.white70,
+                    type: ColumnType.string,
+                    columnHeader:Text("Address"),
+                    textColor: Colors.black54,
+                  ),
+                  ColumnInfo(
+                    rowName: "Phone",
+                    type: ColumnType.string,
+                    columnHeader: Text("Phone"),
+                    textColor: Colors.black54,
+                  ),
+                ]
+            ),
 
-          InkWell(
-            onTap: (){
-             // viewModel.setAgeValue();
-            },
-            child: Text("change value"),
-          )
-        ],
+            InkWell(
+              onTap: (){
+                setAgeValue();
+              },
+              child: Text("change value"),
+            )
+          ],
+        ),
       )
     );
+  }
+
+  void setAgeValue() {
+    int a = int.parse(age.value);
+    a++;
+    age.value = a.toString();
+    age.notifyChanged();
   }
 }

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:reactive_datatable_a/src/notify/reactive_notifyer.dart';
+import 'package:reactive_datatable_a/src/table/calculate_cellsize.dart';
+
+import '../../reactive_datatable_a.dart';
 
 class TableConf {
 
@@ -16,16 +18,55 @@ class TableConf {
     _instance=null;
   }
 
-  ///Table height and witdh control
-  double _colMinHeight = 50;
+  ///Screen Width
+  double _screenWidth = 0.0;
 
-  double get colMinHeight => _colMinHeight;
+  double get screenWidth => _screenWidth;
 
-  void setColMinHeight(double height) {
-    _colMinHeight = height;
+  void setScreenWidth(double width) {
+    _screenWidth = width;
+    CalculateCellSize().calculateColumnSize();
+   // _screenWidth.notifyChanged();
   }
 
-  double _colMinWidth  = 100;
+
+
+  ///table item
+  List<Map<String, ValueNotifier>> _rowList = [];
+
+  List<Map<String, ValueNotifier>> get rowList => _rowList;
+
+  void setRowList(List<Map<String, ValueNotifier>> rowList) {
+    _rowList = rowList;
+  }
+
+  List<ColumnInfo> _columnList = [];
+
+  List<ColumnInfo> get columnList => _columnList;
+
+  void setColumnList(List<ColumnInfo> colList) {
+    _columnList = colList;
+  }
+
+  // ///Table padding
+  // EdgeInsets _padding = EdgeInsets.zero;
+  //
+  // EdgeInsets get padding => _padding;
+  //
+  // void setPadding(EdgeInsets padding) {
+  //   _padding = padding;
+  // }
+
+  ///Table height and witdh control
+  double _colHeight = 50;
+
+  double get colHeight => _colHeight;
+
+  void setColMinHeight(double height) {
+    _colHeight = height;
+  }
+
+  double _colMinWidth  = 30;
 
   double get colMinWidth => _colMinWidth;
 
@@ -89,7 +130,7 @@ class TableConf {
     _textColor = color;
   }
 
-  Color _borderColor = Colors.white12;
+  Color _borderColor = Colors.black54;
 
   Color get borderColor => _borderColor;
 

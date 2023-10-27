@@ -2,14 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:reactive_datatable_a/src/notify/reactive_notifyer.dart';
-
-import '../../reactive_datatable_a.dart';
+import 'package:reactive_datatable_a/src/table/table_conf.dart';
 
 class BuildRow {
-  final List<Map<String, ValueNotifier>> dataSource;
-  final List<ColumnInfo> columData;
-
-  BuildRow({required this.columData,required this.dataSource});
 
   DataRow build(Map<String, dynamic> rowData,int rowIndex) {
     return DataRow(
@@ -18,22 +13,40 @@ class BuildRow {
   }
   
   List<DataCell> buildCell (Map<String, dynamic> rowData,int rowIndex) {
-    return List.generate(columData.length, (index) => DataCell(
+    TableConf conf = TableConf.init();
+    return List.generate(conf.columnList.length, (index) => DataCell(
     Builder(
       builder: (subContext) {
-        ValueNotifier<String?>? valueNotifier = rowData[columData[index].rowName];
+        ValueNotifier<String?>? valueNotifier = rowData[conf.columnList[index].rowName];
         return ConstrainedBox(
           constraints: BoxConstraints(
-              maxWidth: columData[index].columWidth!.reactiveValue(subContext),minHeight: 50,minWidth: index==0?30:100,
+              maxWidth: conf.columnList[index].notifyColumnWith.reactiveValue(subContext),minHeight: conf.rowMinHeight,minWidth: conf.colMinWidth,
           ),
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              border:  Border.all(color: Colors.white38),
-              color:(columData[index].backgroundColor!=null)?columData[index].backgroundColor!:Colors.transparent,
+              border: Border(
+                right: BorderSide(
+                    width: conf.borderSize,
+                    color: conf.borderColor
+                ),
+                // top: BorderSide(
+                //     width: conf.borderSize,
+                //     color: conf.borderColor
+                // ),
+                bottom: BorderSide(
+                    width: conf.borderSize,
+                    color: conf.borderColor
+                ),
+                left: BorderSide(
+                    width: conf.borderSize,
+                    color: index==0?conf.borderColor:Colors.transparent
+                ),
+              ),
+              color:(conf.columnList[index].backgroundColor!=null)?conf.columnList[index].backgroundColor!:Colors.transparent,
 
             ),
-              child: Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:TextStyle(color:columData[index].textColor,))
+              child: Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:TextStyle(color:conf.columnList[index].textColor,))
           ),
         );
       }

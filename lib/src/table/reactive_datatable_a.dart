@@ -9,7 +9,11 @@ class ReactiveDataTableA extends StatefulWidget {
   // final double maxWidth;
   // final double maxHeight;
   //
-  const ReactiveDataTableA({Key? key,required this.dataSource, required this.columData }) : super(key: key);
+  ReactiveDataTableA({Key? key,required this.dataSource, required this.columData }) : super(key: key) {
+    TableConf conf = TableConf.init();
+    conf.setRowList(dataSource);
+    conf.setColumnList(columData);
+  }
 
   @override
   State<ReactiveDataTableA> createState() => _ResizeTableAState();
@@ -22,25 +26,31 @@ class _ResizeTableAState extends State<ReactiveDataTableA> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      thumbVisibility: true,
-      trackVisibility: true, // make the scrollbar easy to see
-      controller: verticalScrollController,
-      child: Scrollbar(
-        thumbVisibility: true,
-        trackVisibility: true,
-        controller: horizontalScrollController,
-        notificationPredicate: (notify) => notify.depth == 1,
-        child: SingleChildScrollView(
+    TableConf conf = TableConf.init();
+    return LayoutBuilder(
+        builder: (context, constraints) {
+          conf.setScreenWidth(constraints.maxWidth);
+        return Scrollbar(
+          thumbVisibility: true,
+          trackVisibility: true, // make the scrollbar easy to see
           controller: verticalScrollController,
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
+          child: Scrollbar(
+            thumbVisibility: true,
+            trackVisibility: true,
             controller: horizontalScrollController,
-            scrollDirection: Axis.horizontal,
-            child:  BuildTable(dataSource: widget.dataSource,columData: widget.columData).build(),
+            notificationPredicate: (notify) => notify.depth == 1,
+            child: SingleChildScrollView(
+              controller: verticalScrollController,
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                controller: horizontalScrollController,
+                scrollDirection: Axis.horizontal,
+                child:  BuildTable().build(),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 

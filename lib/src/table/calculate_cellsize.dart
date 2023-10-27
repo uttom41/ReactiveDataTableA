@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:reactive_datatable_a/src/table/table_conf.dart';
 
@@ -11,7 +10,6 @@ class CalculateCellSize{
 
     TableConf conf = TableConf.init();
 
-   // double extraWidth = ((cellWidth-30)/(conf.columnList.length-1)) + cellWidth;
     double currentWidth = conf.screenWidth; /// total width.
     int totalCelCount =0;
 
@@ -34,33 +32,39 @@ class CalculateCellSize{
       }
     }
 
-    // for (ColumnInfo cell in parent.columData) {
-    //  // Size size = _textSize(cell.rowName, TextStyle(fontSize: 14, fontFamily: parent.theme.fonts));
-    //  // cell.columWidth = (parent.maxWidth>(size.width + 50.0))?(size.width + 50.0):parent.maxWidth;
-    //  // cell.columHeight= cell.columHeight > size.height?cell.columHeight:size.height;
-    //   if (parent.dataSource.isNotEmpty) {
-    //     for (Map<String, dynamic> rowItem in parent.dataSource) {
-    //      // if (cell.iconStatus == null) {
-    //         String text = rowItem[cell.rowName].value;
-    //         if (cell.formatter != null) {
-    //           text = cell.formatter!(rowItem[cell.name]);
-    //         }
-    //         Size size = _textSize(text, TextStyle(fontSize: 14, fontFamily: parent.theme.fonts));
-    //         if (cell.columWidth < (size.width + 60.0)) {
-    //           cell.columWidth = (size.width + 50.0);
-    //         }
-    //         cell.columHeight= cell.columHeight > size.height?cell.columHeight:size.height;
-    //     //  }
-    //     }
-    //   }
-    // }
+  }
+
+  void calculateRowSize(int rowIndex) {
+    TableConf conf = TableConf.init();
+
+    double rowHeight = 0.0;
+
+    for (ColumnInfo cell in conf.columnList) {
+      // Size size = _textSize(cell.rowName, TextStyle(fontSize: 14, fontFamily: parent.theme.fonts));
+      // cell.columWidth = (parent.maxWidth>(size.width + 50.0))?(size.width + 50.0):parent.maxWidth;
+      // cell.columHeight= cell.columHeight > size.height?cell.columHeight:size.height;
+
+      if (cell.type == ColumnType.string) {
+        String text = conf.rowList[rowIndex][cell.rowName]?.value;
+
+        if (cell.formatter != null) {
+          text = cell.formatter!(conf.rowList[rowIndex][cell.rowName] as String);
+        }
+
+        Size size = _textSize(text, cell.textStyle,conf.colMinWidth,(cell.notifyColumnWith.value-16));
+        int line = (size.width/(cell.notifyColumnWith.value-16)).round()+2;
+        if(rowHeight<size.height)rowHeight = size.height*line;
+      }
+    }
+
+    conf.rowList[rowIndex]["height"] = ValueNotifier(rowHeight > conf.rowMinHeight? rowHeight:conf.rowMinHeight);
 
   }
 
-  Size _textSize(String text, TextStyle style) {
+  Size _textSize(String text, TextStyle style,double minWidth, double maxWidth) {
     final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text, style: style),maxLines: 6, textDirection: TextDirection.ltr)
-      ..layout(minWidth: 100, maxWidth: 100);/////////maxWidth
+        text: TextSpan(text: text, style: style),maxLines: 1, textDirection: TextDirection.ltr)
+      ..layout();/////////maxWidth
     return textPainter.size;
   }
 }

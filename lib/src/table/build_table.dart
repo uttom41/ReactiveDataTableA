@@ -11,6 +11,7 @@ class BuildTable {
     return DataTable(
       columnSpacing: 0,
       horizontalMargin: 0,
+      dataRowMaxHeight: double.infinity,
       headingRowHeight: 50,
       dividerThickness: conf.borderSize,
      // border: TableBorder.all(color:conf.borderColor),

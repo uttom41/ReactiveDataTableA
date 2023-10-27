@@ -32,7 +32,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  ValueNotifier<String> name = ValueNotifier("Amitghghjgjhgjhgj hjjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklk Amitghghjgjhgjhgj Amitghghjgjhgjhgj hjjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklkAmitghghjgjhgjhgj hjjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklkhjjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklkAmitghghjgjhgjhgj hjjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklk uttom");
+  ValueNotifier<String> name = ValueNotifier("ij hjjhjh kjkjhkhk  kljlk lkjkl lklk lklk uttom");
+  ValueNotifier<String> name2 = ValueNotifier("ij hjjhjh kjkjhkhk uyuugu jdfdgfdg dfdsgfd fdgfdsg skjf kdsjkjfkdsj kjjdshkahfjs kjsdjhjkfh ksdhkjfhdskj kdshkjahfdjks jksdkhkjfkdsj ig kljlk lkjkl jjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklk uttom");
   ValueNotifier<String> age = ValueNotifier("12");
   ValueNotifier<String> address = ValueNotifier("Uttra");
   ValueNotifier<String> phone = ValueNotifier("01717633441");
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
             ReactiveDataTableA(
                 dataSource: [
                   {"name":name,"age":age,"Address":address,"Phone":phone},
-                  {"name":name,"age":age,"Address":address,"Phone":phone},
+                  {"name":name2,"age":age,"Address":address,"Phone":phone},
                   {"name":name,"age":age,"Address":address,"Phone":phone},
                   {"name":name,"age":age,"Address":address,"Phone":phone},
                 ],
@@ -60,32 +61,27 @@ class _HomeState extends State<Home> {
                     columnHeader: Text(""),
                     columWidth: 30,
                     backgroundColor: Colors.white38,
-                    textColor: Colors.black54,
                   ),
                   ColumnInfo(
                     rowName: "name",
                     type: ColumnType.string,
                     columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
-                    textColor: Colors.black54,
                   ),
                   ColumnInfo(
                     rowName: "age",
                     type: ColumnType.string,
                     columnHeader: Text("Age"),
-                    textColor: Colors.black54,
                   ),
                   ColumnInfo(
                     rowName: "Address",
                     backgroundColor: Colors.white70,
                     type: ColumnType.string,
                     columnHeader:Text("Address"),
-                    textColor: Colors.black54,
                   ),
                   ColumnInfo(
                     rowName: "Phone",
                     type: ColumnType.string,
                     columnHeader: Text("Phone"),
-                    textColor: Colors.black54,
                   ),
                 ]
             ),

@@ -1,9 +1,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:reactive_datatable_a/reactive_datatable_a.dart';
 import 'package:reactive_datatable_a/src/notify/reactive_notifyer.dart';
 import 'package:reactive_datatable_a/src/table/calculate_cellsize.dart';
 import 'package:reactive_datatable_a/src/table/table_conf.dart';
+
+import '../field/text_field.dart';
 
 class BuildRow {
 
@@ -22,6 +25,14 @@ class BuildRow {
         Builder(
             builder: (subContext) {
               ValueNotifier<String?>? valueNotifier = rowData[conf.columnList[index].rowName];
+              Widget widget = Container();
+              if(conf.columnList[index].type == ColumnType.sl || ColumnType.string ==conf.columnList[index].type) {
+                widget = Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:conf.columnList[index].textStyle);
+              } else if (conf.columnList[index].type == ColumnType.editText) {
+                widget = CustomTextField(
+                  onChanged:(String? value) => valueNotifier?.value = value,
+                );
+              }
               return Container(
                   width: conf.columnList[index].notifyColumnWith.reactiveValue(subContext),
                   height: rowHeight+16,
@@ -49,12 +60,20 @@ class BuildRow {
                     color:(conf.columnList[index].backgroundColor!=null)?conf.columnList[index].backgroundColor!:Colors.transparent,
 
                   ),
-                  child: Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:conf.columnList[index].textStyle)
+                  child: widget
               );
             }
         ),
       );
     }
     );
+
+
   }
+  // Widget rowWidget(ColumnType type) {
+  //   return switch(type) {
+  //
+  //     _=> Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:conf.columnList[index].textStyle)
+  //   };
+  // }
 }

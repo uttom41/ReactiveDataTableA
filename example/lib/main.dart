@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
   ValueNotifier<String> name2 = ValueNotifier("ij hjjhjh kjkjhkhk uyuugu jdfdgfdg dfdsgfd fdgfdsg skjf kdsjkjfkdsj kjjdshkahfjs kjsdjhjkfh ksdhkjfhdskj kdshkjahfdjks jksdkhkjfkdsj ig kljlk lkjkl jjhjh kjkjhkhk uyuuguig kljlk lkjkl lklk lklk uttom");
   ValueNotifier<String> age = ValueNotifier("12");
   ValueNotifier<String> address = ValueNotifier("Uttra");
+  ValueNotifier<String> email = ValueNotifier("");
   ValueNotifier<String> phone = ValueNotifier("01717633441");
 
   @override
@@ -54,10 +55,11 @@ class _HomeState extends State<Home> {
                     minColumnWith: 150,
                     minRowHeight: 50,
                     dataSource: [
-                      {"name":name,"age":age,"Address":address,"Phone":phone},
-                      {"name":name2,"age":age,"Address":address,"Phone":phone},
-                      {"name":name,"age":age,"Address":address,"Phone":phone},
-                      {"name":name,"age":age,"Address":address,"Phone":phone},
+                      {"name":name,"age":age,"Address":address,"Phone":phone,"email":email},
+                      {"name":name,"age":age,"Address":address,"Phone":phone,"email":email},
+                      {"name":name,"age":age,"Address":address,"Phone":phone,"email":email},
+                      {"name":name,"age":age,"Address":address,"Phone":phone,"email":email},
+
                     ],
                     columData: [
                       ColumnInfo(
@@ -87,6 +89,11 @@ class _HomeState extends State<Home> {
                         rowName: "Phone",
                         type: ColumnType.string,
                         columnHeader: Text("Phone"),
+                      ),
+                      ColumnInfo(
+                        rowName: "email",
+                        type: ColumnType.editText,
+                        columnHeader: Text("Email"),
                       ),
                     ]
                 ),

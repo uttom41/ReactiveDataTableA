@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                 child: ReactiveDataTableA(
                     borderColor: Colors.purple,
                     dividerThickness: 1,
-                    minColumnWith: 50,
+                    minColumnWith: 150,
                     minRowHeight: 50,
                     dataSource: [
                       {"name":name,"age":age,"Address":address,"Phone":phone},

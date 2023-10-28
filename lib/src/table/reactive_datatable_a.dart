@@ -57,10 +57,10 @@ class _ResizeTableAState extends State<ReactiveDataTableA> {
               notificationPredicate: (notify) => notify.depth == 1,
               child: SingleChildScrollView(
                 controller: verticalScrollController,
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
                   controller: horizontalScrollController,
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   child:  BuildTable().build(),
                 ),
               ),

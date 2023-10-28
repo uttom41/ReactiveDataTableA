@@ -65,5 +65,5 @@ enum ColumnType {
   icon,
   image,
   checkBox,
-  button
+  action
 }

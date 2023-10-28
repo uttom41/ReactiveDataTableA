@@ -30,7 +30,17 @@ class BuildRow {
                 widget = Text(valueNotifier?.reactiveValue(subContext)??"${rowIndex+1}",style:conf.columnList[index].textStyle);
               } else if (conf.columnList[index].type == ColumnType.editText) {
                 widget = CustomTextField(
-                  onChanged:(String? value) => valueNotifier?.value = value,
+                  onChanged:(String? value) {
+                    valueNotifier?.value = value;
+
+                  }
+                );
+              } else if(conf.columnList[index].type == ColumnType.action) {
+                widget = InkWell(
+                  onTap: (){
+
+                  },
+                  child: Container(color: Colors.teal,width: double.infinity,height: double.infinity,),
                 );
               }
               return Container(

@@ -42,7 +42,7 @@ class BuildRow {
                           color: conf.borderColor
                       ),
                       left: BorderSide(
-                          width: conf.borderSize,
+                          width: index==0?conf.borderSize:0,
                           color: index==0?conf.borderColor:Colors.transparent
                       ),
                     ),

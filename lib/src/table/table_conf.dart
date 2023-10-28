@@ -71,7 +71,7 @@ class TableConf {
   double get colMinWidth => _colMinWidth;
 
   void setColMinWidth(double width) {
-    _colMinWidth = width;
+    if(width >0.0)_colMinWidth = width;
   }
 
   double _colMaxWidth  = 100;
@@ -95,7 +95,7 @@ class TableConf {
   double get rowMinHeight => _rowMinHeight;
 
   void setRowMinHeight(double height) {
-    _rowMinHeight = height;
+    if(height>0.0)_rowMinHeight = height;
   }
 
   double _rowMinWidth  = 100;
@@ -134,8 +134,8 @@ class TableConf {
 
   Color get borderColor => _borderColor;
 
-  void setBorderColor(Color color) {
-    _borderColor = color;
+  void setBorderColor(Color? color) {
+    if(color != null)_borderColor = color;
   }
 
   double _textSize = 12.0;
@@ -151,7 +151,7 @@ class TableConf {
   double get borderSize => _borderSize;
 
   void setBorderSize(double borderSize) {
-    _borderSize = borderSize;
+   if(borderSize != 0.0) _borderSize = borderSize;
   }
 
   bool _slNo = true;

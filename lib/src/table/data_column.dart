@@ -14,7 +14,7 @@ class BuildDataColumn {
               width: columnInfo.notifyColumnWith.reactiveValue(subContext),
               height: columnInfo.columHeight, //parent.headerHeight,
               alignment: Alignment.center,
-              constraints: BoxConstraints(minWidth: conf.colMinWidth,maxWidth: columnInfo.notifyColumnWith.reactiveValue(subContext)),
+              constraints: BoxConstraints(minWidth: columnInfo.type==ColumnType.sl?5:conf.colMinWidth,maxWidth: columnInfo.notifyColumnWith.reactiveValue(subContext)),
               decoration: BoxDecoration(
                 border: Border(
                   right: BorderSide(
@@ -30,7 +30,7 @@ class BuildDataColumn {
                       color: conf.borderColor
                   ),
                   left: BorderSide(
-                      width: conf.borderSize,
+                      width: colIndex==0?conf.borderSize:0,
                       color: colIndex==0?conf.borderColor:Colors.transparent
                   ),
                 ),

@@ -41,60 +41,66 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white38,
-      appBar: AppBar(title: Text("Example"),backgroundColor: Colors.deepPurple,),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ReactiveDataTableA(
-                dataSource: [
-                  {"name":name,"age":age,"Address":address,"Phone":phone},
-                  {"name":name2,"age":age,"Address":address,"Phone":phone},
-                  {"name":name,"age":age,"Address":address,"Phone":phone},
-                  {"name":name,"age":age,"Address":address,"Phone":phone},
-                ],
-                columData: [
-                  ColumnInfo(
-                    rowName: "",
-                    type: ColumnType.sl,
-                    columnHeader: Text(""),
-                    columWidth: 30,
-                    backgroundColor: Colors.white38,
-                  ),
-                  ColumnInfo(
-                    rowName: "name",
-                    type: ColumnType.string,
-                    columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
-                  ),
-                  ColumnInfo(
-                    rowName: "age",
-                    type: ColumnType.string,
-                    columnHeader: Text("Age"),
-                  ),
-                  ColumnInfo(
-                    rowName: "Address",
-                    backgroundColor: Colors.white70,
-                    type: ColumnType.string,
-                    columnHeader:Text("Address"),
-                  ),
-                  ColumnInfo(
-                    rowName: "Phone",
-                    type: ColumnType.string,
-                    columnHeader: Text("Phone"),
-                  ),
-                ]
-            ),
+        backgroundColor: Colors.white38,
+        appBar: AppBar(title: Text("Example"),backgroundColor: Colors.deepPurple,),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: ReactiveDataTableA(
+                    borderColor: Colors.purple,
+                    dividerThickness: 1,
+                    minColumnWith: 50,
+                    minRowHeight: 50,
+                    dataSource: [
+                      {"name":name,"age":age,"Address":address,"Phone":phone},
+                      {"name":name2,"age":age,"Address":address,"Phone":phone},
+                      {"name":name,"age":age,"Address":address,"Phone":phone},
+                      {"name":name,"age":age,"Address":address,"Phone":phone},
+                    ],
+                    columData: [
+                      ColumnInfo(
+                        rowName: "",
+                        type: ColumnType.sl,
+                        columnHeader: Text(""),
+                        columWidth: 30,
+                        backgroundColor: Colors.white38,
+                      ),
+                      ColumnInfo(
+                        rowName: "name",
+                        type: ColumnType.string,
+                        columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
+                      ),
+                      ColumnInfo(
+                        rowName: "age",
+                        type: ColumnType.string,
+                        columnHeader: Text("Age"),
+                      ),
+                      ColumnInfo(
+                        rowName: "Address",
+                        backgroundColor: Colors.white70,
+                        type: ColumnType.string,
+                        columnHeader:Text("Address"),
+                      ),
+                      ColumnInfo(
+                        rowName: "Phone",
+                        type: ColumnType.string,
+                        columnHeader: Text("Phone"),
+                      ),
+                    ]
+                ),
+              ),
 
-            InkWell(
-              onTap: (){
-                setAgeValue();
-              },
-              child: Text("change value"),
-            )
-          ],
-        ),
-      )
+              InkWell(
+                onTap: (){
+                  setAgeValue();
+                },
+                child: Text("change value"),
+              )
+            ],
+          ),
+        )
     );
   }
 

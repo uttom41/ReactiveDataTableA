@@ -13,7 +13,7 @@ class BuildTable {
       horizontalMargin: 0,
       dataRowMaxHeight: double.infinity,
       headingRowHeight: 50,
-      dividerThickness: conf.borderSize,
+      dividerThickness: null,//conf.borderSize,
      // border: TableBorder.all(color:conf.borderColor),
       columns: List.generate(conf.columnList.length, (index) {
         return DataColumn(

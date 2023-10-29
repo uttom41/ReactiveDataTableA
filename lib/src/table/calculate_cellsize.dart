@@ -57,7 +57,7 @@ class CalculateCellSize{
       }
     }
 
-    conf.rowList[rowIndex]["height"] = ValueNotifier(rowHeight > conf.rowMinHeight? rowHeight:conf.rowMinHeight);
+    conf.rowList[rowIndex]["height"] = ValueNotifier<double>(rowHeight > conf.rowMinHeight? rowHeight:conf.rowMinHeight);
 
   }
 

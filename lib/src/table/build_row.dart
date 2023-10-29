@@ -46,7 +46,7 @@ class BuildRow {
               return Container(
                   width: conf.columnList[index].notifyColumnWith.reactiveValue(subContext),
                   height: rowHeight+16,
-                  padding: const EdgeInsets.all(8),
+                 // padding: const EdgeInsets.all(8),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     border: Border(

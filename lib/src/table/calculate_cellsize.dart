@@ -14,7 +14,7 @@ class CalculateCellSize{
     int totalCelCount =0;
 
     for(ColumnInfo  cel in conf.columnList) {
-      if(cel.type == ColumnType.sl && cel.columWidth==0.0){
+      if(cel.type == ColumnType.sl && cel.columWidth== null){
         cel.setCollWidth(30);
         currentWidth -=30;
       } else if(cel.columWidth != null && cel.columWidth != 0.0) {
@@ -45,7 +45,12 @@ class CalculateCellSize{
       // cell.columHeight= cell.columHeight > size.height?cell.columHeight:size.height;
 
       if (cell.type == ColumnType.string) {
-        String text = conf.rowList[rowIndex][cell.rowName]?.value;
+        String text= "";
+        if(conf.rowList[rowIndex][cell.rowName] is ValueNotifier){
+          text = conf.rowList[rowIndex][cell.rowName]?.value;
+        }else {
+          text =  text = conf.rowList[rowIndex][cell.rowName];
+        }
 
         if (cell.formatter != null) {
           text = cell.formatter!(conf.rowList[rowIndex][cell.rowName] as String);

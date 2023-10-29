@@ -47,9 +47,9 @@ class CalculateCellSize{
       if (cell.type == ColumnType.string) {
         String text= "";
         if(conf.rowList[rowIndex][cell.rowName] is ValueNotifier){
-          text = conf.rowList[rowIndex][cell.rowName]?.value;
+          text = conf.rowList[rowIndex][cell.rowName]?.value??"";
         }else {
-          text =  text = conf.rowList[rowIndex][cell.rowName];
+          text = conf.rowList[rowIndex][cell.rowName]??"";
         }
 
         if (cell.formatter != null) {

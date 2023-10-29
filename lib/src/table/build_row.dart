@@ -10,7 +10,7 @@ import '../field/text_field.dart';
 
 class BuildRow {
 
-  DataRow build(Map<String, dynamic> rowData,int rowIndex) {
+  DataRow build(Map<String,  ValueNotifier> rowData,int rowIndex) {
     CalculateCellSize().calculateRowSize(rowIndex);
     return DataRow(
       cells: buildCell(rowData,rowIndex),

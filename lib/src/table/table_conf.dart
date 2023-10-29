@@ -32,11 +32,11 @@ class TableConf {
 
 
   ///table item
-  List<Map<String, ValueNotifier>> _rowList = [];
+  List<Map<String, dynamic>> _rowList = [];
 
-  List<Map<String, ValueNotifier>> get rowList => _rowList;
+  List<Map<String, dynamic>> get rowList => _rowList;
 
-  void setRowList(List<Map<String, ValueNotifier>> rowList) {
+  void setRowList(List<Map<String, dynamic>> rowList) {
     _rowList = rowList;
   }
 

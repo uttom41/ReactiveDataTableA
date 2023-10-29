@@ -4,7 +4,7 @@ import '../../reactive_datatable_a.dart';
 
 
 class ReactiveDataTableA extends StatefulWidget {
-  final List<Map<String, ValueNotifier>> dataSource;
+  final List<Map<String, dynamic>> dataSource;
   final List<ColumnInfo> columData;
   final double? minColumnWith;
   final double? minRowHeight;

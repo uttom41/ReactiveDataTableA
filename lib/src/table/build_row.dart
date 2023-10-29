@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:reactive_datatable_a/reactive_datatable_a.dart';
-import 'package:reactive_datatable_a/src/notify/reactive_notifyer.dart';
 import 'package:reactive_datatable_a/src/table/calculate_cellsize.dart';
 import 'package:reactive_datatable_a/src/table/table_conf.dart';
 
@@ -10,7 +9,7 @@ import '../field/text_field.dart';
 
 class BuildRow {
 
-  DataRow build(Map<String,  ValueNotifier> rowData,int rowIndex) {
+  DataRow build(Map<String,  dynamic> rowData,int rowIndex) {
     CalculateCellSize().calculateRowSize(rowIndex);
     return DataRow(
       cells: buildCell(rowData,rowIndex),
@@ -19,7 +18,7 @@ class BuildRow {
 
   List<DataCell> buildCell (Map<String, dynamic> rowData,int rowIndex) {
     TableConf conf = TableConf.init();
-    double rowHeight =rowData["height"].value??conf.rowMaxHeight;
+    double rowHeight =rowData["height"]??conf.rowMaxHeight;
     return List.generate(conf.columnList.length, (index) {
       return DataCell(
         Builder(

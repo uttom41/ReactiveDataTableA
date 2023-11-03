@@ -50,57 +50,119 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Expanded(
-                child: ReactiveDataTableA(
+               child: ReactiveDataTableA(
                     borderColor: Colors.purple,
-                    dividerThickness: 1,
-                    minColumnWith: 150,
+                     borderThickness: 1,
+                    minColumnWith: 50,
                     minRowHeight: 50,
-                    dataSource: [
+                    headerBackgroundColor: Colors.purple.withOpacity(.5),
+                    rowDataList: [
                       {"name":name,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
-                      {"name":name,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
+                      {"name":name2,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
                       {"name":name,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
 
                     ],
-                    columData: [
-                      ColumnInfo(
+                    dataColumns: [
+                      DataColumnA(
                         rowName: "",
                         type: ColumnType.sl,
-                        columnHeader: Text(""),
+                        label: Text(""),
+                        textStyle: TextStyle(color: Colors.white,fontSize: 14),
                         columWidth: 30,
-                        backgroundColor: Colors.white38,
+                        backgroundColor: Colors.purple.withOpacity(.5),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "name",
                         type: ColumnType.string,
-                        columnHeader: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name")],),
+                        tooltip: "Uttom name",
+                        label: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name", style:TextStyle(color: Colors.white,fontSize: 14),)],),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "age",
                         type: ColumnType.string,
-                        columnHeader: Text("Age"),
+                        label: Text("Age",style:TextStyle(color: Colors.white,fontSize: 14)),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "Address",
                         backgroundColor: Colors.white70,
                         type: ColumnType.string,
-                        columnHeader:Text("Address"),
+                        label:Text("Address",style:TextStyle(color: Colors.white,fontSize: 14)),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "Phone",
                         type: ColumnType.string,
-                        columnHeader: Text("Phone"),
+                        label: Text("Phone",style:TextStyle(color: Colors.white,fontSize: 14)),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "email",
                         type: ColumnType.editText,
-                        columnHeader: Text("Email"),
+                        label: Text("Email",style:TextStyle(color: Colors.white,fontSize: 14)),
                       ),
-                      ColumnInfo(
+                      DataColumnA(
                         rowName: "action",
                         type: ColumnType.action,
-                        columnHeader: Text("Action"),
+                        label: Text("Action",style:TextStyle(color: Colors.white,fontSize: 14)),
                       ),
-                    ]
+                    ],
+                 rows: [],
+                ),
+              ),
+              Expanded(
+                child: ReactiveDataTableA(
+                  borderColor: Colors.purple,
+                  borderThickness: 1,
+                  minColumnWith: 100,
+                  minRowHeight: 50,
+                  headerBackgroundColor: Colors.purple.withOpacity(.5),
+                  rowDataList: [
+                    {"name":name,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
+                    {"name":name2,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
+                    {"name":name,"age":age,"Address":address,"Phone":phone,"email":email,"action":action},
+
+                  ],
+                  dataColumns: [
+                    DataColumnA(
+                      rowName: "",
+                      type: ColumnType.sl,
+                      label: Text(""),
+                      textStyle: TextStyle(color: Colors.white,fontSize: 14),
+                      columWidth: 30,
+                      backgroundColor: Colors.purple.withOpacity(.5),
+                    ),
+                    DataColumnA(
+                      rowName: "name",
+                      type: ColumnType.string,
+                      tooltip: "Uttom name",
+                      label: Row(mainAxisAlignment:MainAxisAlignment.center,children: [Container(color: Colors.red,height: 20,width: 20,),Text("Name", style:TextStyle(color: Colors.white,fontSize: 14),)],),
+                    ),
+                    DataColumnA(
+                      rowName: "age",
+                      type: ColumnType.string,
+                      label: Text("Age",style:TextStyle(color: Colors.white,fontSize: 14)),
+                    ),
+                    DataColumnA(
+                      rowName: "Address",
+                      backgroundColor: Colors.white70,
+                      type: ColumnType.string,
+                      label:Text("Address",style:TextStyle(color: Colors.white,fontSize: 14)),
+                    ),
+                    DataColumnA(
+                      rowName: "Phone",
+                      type: ColumnType.string,
+                      label: Text("Phone",style:TextStyle(color: Colors.white,fontSize: 14)),
+                    ),
+                    DataColumnA(
+                      rowName: "email",
+                      type: ColumnType.editText,
+                      label: Text("Email",style:TextStyle(color: Colors.white,fontSize: 14)),
+                    ),
+                    DataColumnA(
+                      rowName: "action",
+                      type: ColumnType.action,
+                      label: Text("Action",style:TextStyle(color: Colors.white,fontSize: 14)),
+                    ),
+                  ],
+                  rows: [],
                 ),
               ),
 
